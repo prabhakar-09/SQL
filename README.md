@@ -87,3 +87,20 @@ Advanced Topics:
   - Working with XML data
   - Geospatial data handling
   - Security and permissions management
+
+
+THE SELECT STATEMENT: 
+
+The SELECT statement in SQL is used to retrieve data from a database. It's the most commonly used SQL command and follows this basic syntax:
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+SELECT: Specifies the columns you want to retrieve.
+FROM: Specifies the table from which to retrieve the data.
+WHERE: Optional; filters the rows returned based on specified conditions.
+
+SELECT name, age FROM employees;
+
+This will return only the "name" and "age" columns for all rows in the "employees" table. 
