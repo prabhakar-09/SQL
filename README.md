@@ -90,7 +90,7 @@ Advanced Topics:
 
 ###########################################################################################################
 
-**THE SELECT STATEMENT:**
+**THE SELECT STATEMENT**
 --------------------------
 
   - The SELECT statement in SQL is used to retrieve data from a database. It's the most commonly used SQL command and follows this basic syntax:
@@ -110,7 +110,7 @@ Advanced Topics:
 
 This will return only the "name" and "age" columns for all rows in the "employees" table. 
 
-**ORDER BY Clause:**
+**ORDER BY Clause**
 ---------------------
 - The ORDER BY clause is used to sort the result set returned by a SQL query in ascending or descending order based on one or more columns. By default, the sorting is done in ascending order. You can specify the   column(s) by which you want to sort, and optionally specify the direction of sorting (ascending or descending) using the ASC or DESC keywords respectively.
 - _Example :_ Consider a table named students with columns id, name, and age. If you want to retrieve the names of students sorted alphabetically in ascending order, you can use the ORDER BY clause as follows:
@@ -131,3 +131,31 @@ WHERE age > 20
 ORDER BY age DESC;
 ```
 This query will first filter the rows from the students table where the age is greater than 20, then it will retrieve the names and ages of those students, and finally, it will sort the result set based on the age column in descending order.
+
+**LIMIT Clause**
+------------------
+
+- The _LIMIT_ Clause is used to restrict the number of rows retrieved by the Query.
+- It's often used in combination with the _SELECT_ Statement to set a limit on the number of rows the query returns.
+- _Example:_ Suppose we've a table _employees_ and we want to retrieve only first 10 records from the table. Here's how we're gonna do it;
+
+  ```sql
+  SELECT * FROM employees
+  LIMIT 10;
+  ```
+This query will return only the first 5 rows from the employees table.
+
+
+**OFFSET Clause**
+--------------------
+- The _OFFSET_ Clause is used to skip specified number of rows before starting to fetch the result set.
+- It's often used in combination with _LIMIT_ Clause to implement pagination or skip certain number of rows while fetching records from DB.
+- _Example:_ Suppose you want to retrieve next 5 or 10 rows after skipping first five rows. Here's how we're gonna do it;
+
+  ``` sql
+  SELECT * FROM employees
+  LIMIT 5 OFFSET 5;
+  ```
+  This query will skip the first 5 rows and return the next 5 rows from the employees table.
+  
+LIMIT and OFFSET are simple yet powerful clauses used to control the number of rows returned by a query and to skip rows when necessary.
