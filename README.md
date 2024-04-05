@@ -88,7 +88,7 @@ Advanced Topics:
   - Geospatial data handling
   - Security and permissions management
 
-##########################################################################################
+--------------------------------------------------------------------
 
 **THE SELECT STATEMENT**
 --------------------------
@@ -193,7 +193,7 @@ We can use the COUNT() function as needed to retrieve data with or without condi
 
  2. **SUM():** is used to sum up all the rows of a specified column and returns one value which is the sum of all the rows. <br>
  
-    - _Example:_ consider the below _sales_ table; <br>
+    - _Example:_ Consider the below _sales_ table; <br>
     
       | id | product | quantity | price |
       |----|---------|----------|-------|
@@ -214,4 +214,77 @@ We can use the COUNT() function as needed to retrieve data with or without condi
      ```
      Total Revenue = (10 * 2.5) + (15 * 1.8) + (20 * 2.0) + (12 * 3.5) + (8 * 2.2) = 149
      ```
-That's how we can use the _SUM()_ function in SQL to calculate the sum of values in a column, which is particularly useful for calculating totals, such as total revenue, total quantity sold, etc.
+That's how we can use the _SUM()_ function in SQL to calculate the sum of values in a column, which is particularly useful for calculating totals, such as total revenue, total quantity sold, etc. <br>
+
+ 3. **AVG():**  is an aggregate function with sums up all the values of the rows of a particular column and divides it by the total number of rows present.
+
+    - _Example:_  Consider the below _sales_ table; <br>
+    
+      | id | product | quantity | price |
+      |----|---------|----------|-------|
+      | 1  | Apple   | 10       | 2.5   |
+      | 2  | Banana  | 15       | 1.8   |
+      | 3  | Orange  | 20       | 2.0   |
+      | 4  | Mango   | 12       | 3.5   |
+      | 5  | Grape   | 8        | 2.2   |
+
+   - Suppose we need to find the average price of the products which are being sold. The query would be;
+
+      ```sql
+      SELECT AVG(price) as average_price
+      FROM sales;
+      ```
+   - This query will return the average price of products sold: **2.4**
+   - This value is calculated by summing up all the prices in the price column and then dividing by the total number of rows:
+     ```
+     Average Price = (2.5 + 1.8 + 2.0 + 3.5 + 2.2) / 5 = 2.4
+     ```
+That's how you can use the AVG() function in SQL to calculate the average value of a column, which is particularly useful for finding average prices, average quantities, etc.
+
+ 4. **MIN():** s an aggregate function used to find the minimum value in a specific column. It returns the smallest value from the set of values in the specified column.
+
+    - _Example:_ Consider the below _sales_ table; <br>
+
+      | id | product | quantity | price |
+      |----|---------|----------|-------|
+      | 1  | Apple   | 10       | 2.5   |
+      | 2  | Banana  | 15       | 1.8   |
+      | 3  | Orange  | 20       | 2.0   |
+      | 4  | Mango   | 12       | 3.5   |
+      | 5  | Grape   | 8        | 2.2   |
+      
+   - Suppose you want to find the minimum quantity of products sold. You can use the MIN() function to find the smallest quantity:
+
+     ```sql
+     SELECT MIN(quantity) as minimum_quantity
+     FROM sales;
+     ```
+   - The above query will return the minimal numeral from the table for a specific column which is 8. <br>
+   
+That's how you can use the MIN() function in SQL to find the minimum value of a column, which is particularly useful for identifying the lowest quantity, lowest price, etc.
+
+ 5. **MAX():** is an aggregate function used to find the maximum value in a specific column. It returns the largest value from the set of values in the specified column.
+
+    - _Example:_ Consider the below _sales_ table; <br>
+
+      | id | product | quantity | price |
+      |----|---------|----------|-------|
+      | 1  | Apple   | 10       | 2.5   |
+      | 2  | Banana  | 15       | 1.8   |
+      | 3  | Orange  | 20       | 2.0   |
+      | 4  | Mango   | 12       | 3.5   |
+      | 5  | Grape   | 8        | 2.2   |
+
+   - Suppose you want to find the maximum quantity of products sold. You can use the MAX() function to find the largest quantity:
+
+     ```sql
+     SELECT MAX(quantity) AS max_quantity
+     FROM sales;
+     ```
+   - The above query will return the maximum number(the quantity) from the quantity column which is 20. <br>
+   
+That's how you can use the MAX() function in SQL to find the maximum value of a column, which is particularly useful for identifying the highest quantity, highest price, etc.
+<br>
+
+**JOINS**
+----------------------------------
