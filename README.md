@@ -288,3 +288,41 @@ That's how you can use the MAX() function in SQL to find the maximum value of a 
 
 **JOINS**
 ----------------------------------
+The SQL JOIN is a command clause that combines records from two or more tables in a database. It is a means of combining data in fields from two tables by using values common to each table. 
+
+ 1. **Inner Join:**  An INNER JOIN in SQL is used to retrieve rows from two or more tables based on a related column between them. It returns only the rows where there is a match in both tables, based on the specified join condition.
+
+     - _**Example Tables:**_ <br>
+      Table: **employees**
+
+       | id | name    | department_id |
+       |----|---------|---------------|
+       | 1  | Alice   | 101           |
+       | 2  | Bob     | 102           |
+       | 3  | Charlie | 103           |
+       | 4  | Diana   | 101           |
+
+       Table: **departments** <br>
+
+       | id | name       |
+       |----|------------|
+       | 101| HR         |
+       | 102| Marketing  |
+       | 103| Finance    |
+       | 104| IT         |
+       
+       <br>
+       
+       _Example Query:_ Suppose you want to retrieve the names of employees along with the names of their respective departments. You can use an INNER JOIN to achieve this: <br>
+
+       ```sql
+       SELECT e.name, d.name as dept_name
+       FROM employees e
+       INNER JOIN departments d
+       ON d.id = e.department_id;
+       ```
+
+       <br>
+       
+       
+
