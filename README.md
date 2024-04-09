@@ -303,7 +303,7 @@ The SQL JOIN is a command clause that combines records from two or more tables i
        | 4  | Diana   | 101           |
 
        Table: **departments** <br>
-
+       
        | id | name       |
        |----|------------|
        | 101| HR         |
@@ -316,13 +316,186 @@ The SQL JOIN is a command clause that combines records from two or more tables i
        _Example Query:_ Suppose you want to retrieve the names of employees along with the names of their respective departments. You can use an INNER JOIN to achieve this: <br>
 
        ```sql
-       SELECT e.name, d.name as dept_name
+       SELECT e.name, d.name as department
        FROM employees e
        INNER JOIN departments d
        ON d.id = e.department_id;
        ```
 
-       <br>
+       This query will return: <br>
+
+       | name    | department |
+       |---------|------------|
+       | Alice   | HR         |
+       | Bob     | Marketing  |
+       | Charlie | Finance    |
+       | Diana   | HR         |
+
+ 2. **LEFT JOIN:**  The LEFT JOIN keyword returns all records from the left table, and the matching records from the right table (table2). The result is 0 records from the right side if there is no match.
+    
+     - _**Example Tables:**_ <br>
+       Table: **students** <br>
+    
+        | id | name    | age | grade_id |
+        |----|---------|-----|----------|
+        | 1  | Alice   | 15  | 101      |
+        | 2  | Bob     | 16  | 102      |
+        | 3  | Charlie | 15  | 101      |
+        | 4  | Diana   | 16  | 103      |
+        | 5  | Eve     | 15  | NULL     |
+
+       Table: **grades**
+
+       | id  | grade   |
+       |-----|---------|
+       | 101 | A       |
+       | 102 | B       |
+       | 103 | C       |
+
+
+       _Example Query:_ Suppose we want to retrieve all students along with their grades if they have one, using a LEFT JOIN between the students and grades tables.
+
+       ```sql
+       SELECT s.name, s.age, g.grade
+       FROM students s
+       LEFT JOIN grades g
+       ON g.id = s.grade_id;
+       ```
+
+       This query will return:
+
+       | name    | age | grade |
+       |---------|-----|-------|
+       | Alice   | 15  | A     |
+       | Bob     | 16  | B     |
+       | Charlie | 15  | A     |
+       | Diana   | 16  | C     |
+       | Eve     | 15  | NULL  |
        
+
+       In this query, we are selecting the name and age columns from the students table and the grade column from the grades table. <br>
        
+       We're using a LEFT JOIN between the students and grades tables based on the grade_id column in the students table and the id column in the grades table.<br>
+       
+       The LEFT JOIN includes all rows from the students table regardless of whether there is a matching row in the grades table or not. <br>
+       
+       If there is a match between the grade_id in the students table and the id in the grades table, the corresponding grade is included in the result.<br>
+       
+       If there is no match (such as for Eve, whose grade_id is NULL), the grade is shown as NULL in the result.
+
+ 3. **RIGHT JOIN:** A RIGHT JOIN is similar to a LEFT JOIN, but it returns all rows from the right table and the matching rows from the left table. In other      words, a RIGHT JOIN retrieves all records from the right table and only the matching records from the left table. If there are no matching records in the left table, NULL values are used for columns from the left table.
+
+     - _**Example Tables:**_ <br>
+     
+       Table: **orders** <br>
+
+       | order_id | customer_id | product_id | quantity |
+       |----------|-------------|------------|----------|
+       | 1        | 101         | 201        | 2        |
+       | 2        | 102         | 202        | 1        |
+       | 3        | 103         | 201        | 3        |
+       | 4        | 104         | 203        | 2        |
+       | 5        | 105         | 202        | 1        |
+
+
+       Table: **products** <br>
+
+       | product_id | product_name | price |
+       |------------|--------------|-------|
+       | 201        | Laptop       | 800   |
+       | 202        | Smartphone   | 600   |
+       | 203        | Tablet       | 400   |
+       | 204        | Headphones   | 100   |
+
+       _Example Query:_ Suppose we want to retrieve all orders along with the product names, using a RIGHT JOIN between the orders and products tables.
+
+       ```sql
+       SELECT o.order_id, p.product_name, o.quantity, p.price
+       FROM orders o
+       RIGHT JOIN products p
+       ON p.product_id = o.product_id;
+       ```
+
+       This query will return: <br>
+
+       | order_id | product_name | quantity | price |
+       |----------|--------------|----------|-------|
+       | 1        | Laptop       | 2        | 800   |
+       | 2        | Smartphone   | 1        | 600   |
+       | 3        | Laptop       | 3        | 800   |
+       | 4        | Tablet       | 2        | 400   |
+       | 5        | Smartphone   | 1        | 600   |
+       | NULL     | Headphones   | NULL     | 100   |
+
+       In this query, we are selecting the order_id from the orders table, product_name from the products table, along with the quantity from the orders table and 
+       price from the products table. <br>
+       
+       We're using a RIGHT JOIN between the orders and products tables based on the product_id column in the orders table and the product_id column in the     
+       products table. <br>
+       
+       The RIGHT JOIN includes all rows from the products table regardless of whether there is a matching row in the orders table or not. <br>
+
+       If there is a match between the product_id in the orders table and the product_id in the products table, the corresponding order information is included in        the result. <br>
+       
+       If there is no match (such as for the product with ID 204, which has no corresponding record in the orders table), NULL values are used for columns from           the left table (orders).
+
+ 4. **FULL OUTER JOIN:** A FULL OUTER JOIN returns all records when there is a match in either the left (first) table or the right (second) table. If there is no match, NULL values are used for the columns from the table that lacks a matching row.
+
+       _**Example Tables:**_
+
+       Table: **employees** <br>
+     
+       | id | name    | department_id |
+       |----|---------|---------------|
+       | 1  | Alice   | 101           |
+       | 2  | Bob     | 102           |
+       | 3  | Charlie | 101           |
+       | 4  | Diana   | 103           |
+
+
+       Table: **departments** <br>
+
+       | id | name       |
+       |----|------------|
+       | 101| HR         |
+       | 102| Marketing  |
+       | 103| Finance    |
+       | 104| IT         |
+
+       _Example Query:_ Suppose we want to retrieve all employees along with their department names, using a FULL OUTER JOIN between the employees and departments tables.
+
+       ```sql
+       SELECT e.name as employee_name, d.name as department_name
+       FROM employees e
+       FULL OUTER JOIN departments d
+       ON d.id = e.department_id
+       ```
+
+       This query will return: <br>
+
+       | employee_name | department_name |
+       |---------------|-----------------|
+       | Alice         | HR              |
+       | Bob           | Marketing       |
+       | Charlie       | HR              |
+       | Diana         | Finance         |
+       | NULL          | IT              |
+
+       In this query, we are selecting the name column from the employees table and the name column from the departments table, aliasing them as employee_name and        department_name, respectively. <br>
+       
+       We're using a FULL OUTER JOIN between the employees and departments tables based on the department_id column in the employees table and the id column in    
+       the departments table. <br>
+       
+       The FULL OUTER JOIN includes all rows from both the employees and departments tables, regardless of whether there is a match in the other table. <br>
+       
+       If there is a match between the department_id in the employees table and the id in the departments table, the corresponding department name is included in         the result. <br>
+       
+       If there is no match (such as for the IT department, which has no corresponding employee), NULL values are used for the columns from the table that lacks a        matching row.
+
+
+
+
+
+
+
 
