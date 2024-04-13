@@ -441,7 +441,7 @@ The SQL JOIN is a command clause that combines records from two or more tables i
 
  4. **FULL OUTER JOIN:** A FULL OUTER JOIN returns all records when there is a match in either the left (first) table or the right (second) table. If there is no match, NULL values are used for the columns from the table that lacks a matching row.
 
-       _**Example Tables:**_
+     - _**Example Tables:**_
 
        Table: **employees** <br>
      
@@ -492,9 +492,55 @@ The SQL JOIN is a command clause that combines records from two or more tables i
        
        If there is no match (such as for the IT department, which has no corresponding employee), NULL values are used for the columns from the table that lacks a        matching row.
 
+ 5. **CROSS JOIN:** A CROSS JOIN returns the Cartesian product of the two tables involved in the join. In other words, it combines each row from the first table with every row from the second table, resulting in a result set with the total number of rows equal to the product of the number of rows in the two tables.
+
+     - _**Example Tables:**_ <br>
+
+       Table: **students** <br>
+
+       | id | name    |
+       |----|---------|
+       | 1  | Alice   |
+       | 2  | Bob     |
+       | 3  | Charlie |
 
 
+       Table: **subjects** <br>
 
+       | id | subject   |
+       |----|-----------|
+       | 101| Math      |
+       | 102| Science   |
+
+       _Example Query_: Suppose we want to retrieve all combinations of students and subjects, using a CROSS JOIN between the students and subjects tables.
+
+       ```sql
+           SELECT students.name AS student_name, subjects.subject
+           FROM students
+           CROSS JOIN subjects;
+       ```
+       This query will return the below result; <br>
+    
+       | student_name | subject |
+       |--------------|---------|
+       | Alice        | Math    |
+       | Alice        | Science |
+       | Bob          | Math    |
+       | Bob          | Science |
+       | Charlie      | Math    |
+       | Charlie      | Science |
+
+
+       We're using a CROSS JOIN between the students and subjects tables. <br>
+       
+       The CROSS JOIN combines each row from the students table with every row from the subjects table, resulting in a Cartesian product of the two tables. <br>
+       
+       Each student's name is combined with every subject in the subjects table, resulting in all possible combinations of students and subjects. <br>
+       
+       The resulting table has a row for each combination of student and subject.
+
+
+    
 
 
 
