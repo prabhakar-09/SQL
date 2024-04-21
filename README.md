@@ -540,8 +540,47 @@ The SQL JOIN is a command clause that combines records from two or more tables i
        The resulting table has a row for each combination of student and subject.
 
 
-    
+**SUB-QUERIES**
+--------------
+Subqueries in SQL are queries nested within another query. They allow you to use the result of one query as input for another query. Subqueries can be used in SELECT, INSERT, UPDATE, or DELETE statements to perform complex operations or filter data based on conditions. They are enclosed within parentheses and can appear in various parts of a SQL statement where expressions are allowed.
 
+ <br>
+ 
+Let's use a simple example to demonstrate a practical implementation of a subquery in SQL.
 
+ - _Example:_ Consider two tables: _students_ and _grades_.
 
+   Table: _students_
+
+    | id | name    | age |
+    |----|---------|-----|
+    | 1  | Alice   | 15  |
+    | 2  | Bob     | 16  |
+    | 3  | Charlie | 15  |
+    | 4  | Diana   | 16  |
+ 
+   Table: _grades_
+
+    | id  | grade |
+    |-----|-------|
+    | 1   | A     |
+    | 2   | B     |
+    | 3   | C     |
+
+   - Now, let's say we want to retrieve the names of students who have grades that are not in the 'A' grade. We can use a subquery to achieve this.
+
+     ```sql
+     SELECT name
+     FROM students
+     WHERE id IN (SELECT id FROM grades WHERE grade != 'A');
+     ```
+
+     In this example:
+     
+     The inner subquery (SELECT id FROM grades WHERE grade != 'A') retrieves the IDs of students who have grades other than 'A'. <br>
+     
+     The outer query then uses these IDs to retrieve the names of those students from the students table. <br>
+     
+     This allows us to filter the students based on a condition derived from the grades table, using a subquery.
+     
 
